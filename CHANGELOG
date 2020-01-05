@@ -8,12 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Allow cache users to invalidate a ratelimit after a specific time
 * Changing limit and duration before expire should now work correctly
+* Added Behavior RESET_REMAINING to reset any hits recorded in the cache for the
+  specified rate limit
 
 ## Changes
 * TokenBucketItem is now provided when `OnChange()` is called instead of `RateLimitResp`
 * Fixed a bug in global behaviour where it would return an error if the async
-update had not occured before the a second request is made. Now it acts like it
-owns the rate limit until the owning node sends an update
+  update had not occured before the a second request is made. Now it acts like it
+  owns the rate limit until the owning node sends an update
+* Behavior is now a flag, this should be a backward compatible change for
+  anyone using GLOBAL or NO_BATCHING but will break anyone using
+  DURATION_IS_GREGORIAN. Use `HasBehavior()` function to check for behavior
+  flags.
 
 ## [0.7.1] - 2019-12-10
 ### Added
