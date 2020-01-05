@@ -68,7 +68,7 @@ func tokenBucket(s Store, c Cache, r *RateLimitReq) (resp *RateLimitResp, err er
 		// If the duration config changed, update the new ExpireAt
 		if t.Duration != r.Duration {
 			expire := t.CreatedAt + r.Duration
-			if r.Behavior == Behavior_DURATION_IS_GREGORIAN {
+			if HasBehavior(r.Behavior, Behavior_DURATION_IS_GREGORIAN) {
 				expire, err = GregorianExpiration(time.Now(), r.Duration)
 				if err != nil {
 					return nil, err
@@ -118,7 +118,7 @@ func tokenBucket(s Store, c Cache, r *RateLimitReq) (resp *RateLimitResp, err er
 	// Add a new rate limit to the cache
 	now := MillisecondNow()
 	expire := now + r.Duration
-	if r.Behavior == Behavior_DURATION_IS_GREGORIAN {
+	if HasBehavior(r.Behavior, Behavior_DURATION_IS_GREGORIAN) {
 		expire, err = GregorianExpiration(time.Now(), r.Duration)
 		if err != nil {
 			return nil, err
@@ -190,7 +190,7 @@ func leakyBucket(s Store, c Cache, r *RateLimitReq) (resp *RateLimitResp, err er
 
 		duration := r.Duration
 		rate := duration / r.Limit
-		if r.Behavior == Behavior_DURATION_IS_GREGORIAN {
+		if HasBehavior(r.Behavior, Behavior_DURATION_IS_GREGORIAN) {
 			d, err := GregorianDuration(time.Now(), r.Duration)
 			if err != nil {
 				return nil, err
@@ -268,7 +268,7 @@ func leakyBucket(s Store, c Cache, r *RateLimitReq) (resp *RateLimitResp, err er
 	}
 
 	duration := r.Duration
-	if r.Behavior == Behavior_DURATION_IS_GREGORIAN {
+	if HasBehavior(r.Behavior, Behavior_DURATION_IS_GREGORIAN) {
 		n := time.Now()
 		expire, err := GregorianExpiration(n, r.Duration)
 		if err != nil {
