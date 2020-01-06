@@ -49,7 +49,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestOverTheLimit(t *testing.T) {
-	client, errs := guber.DialV1Server(cluster.GetPeer())
+	client, errs := guber.DialV1Server(cluster.GetRandomPeer())
 	require.Nil(t, errs)
 
 	tests := []struct {
@@ -95,7 +95,7 @@ func TestOverTheLimit(t *testing.T) {
 }
 
 func TestTokenBucket(t *testing.T) {
-	client, errs := guber.DialV1Server(cluster.GetPeer())
+	client, errs := guber.DialV1Server(cluster.GetRandomPeer())
 	require.Nil(t, errs)
 
 	tests := []struct {
@@ -146,7 +146,7 @@ func TestTokenBucket(t *testing.T) {
 }
 
 func TestLeakyBucket(t *testing.T) {
-	client, errs := guber.DialV1Server(cluster.GetPeer())
+	client, errs := guber.DialV1Server(cluster.GetRandomPeer())
 	require.Nil(t, errs)
 
 	tests := []struct {
@@ -206,7 +206,7 @@ func TestLeakyBucket(t *testing.T) {
 }
 
 func TestMissingFields(t *testing.T) {
-	client, errs := guber.DialV1Server(cluster.GetPeer())
+	client, errs := guber.DialV1Server(cluster.GetRandomPeer())
 	require.Nil(t, errs)
 
 	tests := []struct {
@@ -334,7 +334,7 @@ func TestGlobalRateLimits(t *testing.T) {
 }
 
 func TestChangeLimit(t *testing.T) {
-	client, errs := guber.DialV1Server(cluster.GetPeer())
+	client, errs := guber.DialV1Server(cluster.GetRandomPeer())
 	require.Nil(t, errs)
 
 	tests := []struct {
@@ -394,7 +394,7 @@ func TestChangeLimit(t *testing.T) {
 }
 
 func TestResetRemaining(t *testing.T) {
-	client, errs := guber.DialV1Server(cluster.GetPeer())
+	client, errs := guber.DialV1Server(cluster.GetRandomPeer())
 	require.Nil(t, errs)
 
 	tests := []struct {
